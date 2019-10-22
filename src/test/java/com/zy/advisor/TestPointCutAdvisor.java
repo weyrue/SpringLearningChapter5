@@ -58,16 +58,16 @@ public class TestPointCutAdvisor {
 
     @Test
     public void testComposablePointcutAdvisor() {
-        String configPath = "spring/spring-pointcut.xml";
-        ApplicationContext ctx = new ClassPathXmlApplicationContext(configPath);
-
-        Waiter waiter5 = (Waiter) ctx.getBean("waiter5");
-        WaiterDelegate waiterDelegate = new WaiterDelegate();
-        waiterDelegate.setWaiter(waiter5);
-
-        waiter5.serveTo("Peter");
-        waiter5.greetTo("Peter");
-
-        waiterDelegate.service("Peter");
+//        String configPath = "spring/spring-pointcut.xml";
+//        ApplicationContext ctx = new ClassPathXmlApplicationContext(configPath);
+//
+//        Waiter waiter5 = (Waiter) ctx.getBean("waiter5");
+//        WaiterDelegate waiterDelegate = new WaiterDelegate();
+//        waiterDelegate.setWaiter(waiter5);
+//
+//        waiter5.serveTo("Peter");
+//        waiter5.greetTo("Peter");
+//
+//        waiterDelegate.service("Peter");
     }
 }
