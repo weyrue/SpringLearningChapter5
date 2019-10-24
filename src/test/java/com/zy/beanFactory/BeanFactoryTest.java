@@ -23,7 +23,7 @@ public class BeanFactoryTest {
 
         System.out.println("init beanfactory");
 
-        Car car = factory.getBean("car1",Car.class);
+        Car car = factory.getBean("car",Car.class);
         car.introduce();
     }
 }

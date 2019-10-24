@@ -12,14 +12,15 @@
        http://www.springframework.org/schema/aop
        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
-    <bean id="car1" class="com.zy.reflect.Car"
-          p:brand="红旗"
-          p:color="color"
-          p:maxSpeed="200"/>
+    <!--<bean id="car1" class="com.zy.reflect.Car"-->
+          <!--p:brand="红旗"-->
+          <!--p:color="color"-->
+          <!--p:maxSpeed="200"/>-->
 
     <!-- 扫描类包，将标注Spring注解的类自动转化Bean，同时完成Bean的注入 -->
     <context:component-scan base-package="com.zy.dao"/>
     <context:component-scan base-package="com.zy.service"/>
+    <context:component-scan base-package="com.zy.reflect"/>
 
     <!-- 配置数据源 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
