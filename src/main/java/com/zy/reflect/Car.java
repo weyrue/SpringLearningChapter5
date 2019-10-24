@@ -1,11 +1,34 @@
 package com.zy.reflect;
 
-public class Car {
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.*;
+
+public class Car implements BeanFactoryAware, BeanNameAware, InitializingBean, DisposableBean {
     private String brand;
     private String color;
     private int maxSpeed;
 
     public Car() {
+    }
+
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+
+    }
+
+    @Override
+    public void setBeanName(String name) {
+
+    }
+
+    @Override
+    public void destroy() throws Exception {
+
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+
     }
 
     public Car(String brand, String color, int maxSpeed) {
