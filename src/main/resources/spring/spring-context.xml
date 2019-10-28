@@ -12,10 +12,37 @@
        http://www.springframework.org/schema/aop
        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
+<<<<<<< HEAD
+    <bean id="car" class="com.zy.reflect.Car"
+          p:brand="红旗"
+          p:color="color"
+          p:maxSpeed="200"
+    />
+
+    <bean id="car1" class="com.zy.reflect.Car"
+          p:brand="红旗"
+          p:color="color"
+          p:maxSpeed="200"
+          scope="prototype"/>
+    <bean id="magicBoss" class="com.zy.injectFun.MagicFun">
+        <lookup-method name="getCar" bean="car1"/>
+    </bean>
+
+    <bean id="abstractCar" class="com.zy.reflect.Car"
+          p:brand="红旗"
+          p:color="color"
+          p:maxSpeed="200"
+          abstract="true"
+    />
+    <bean id="car2" parent="abstractCar" p:color="红色"/>
+    <bean id="car3" parent="abstractCar" p:color="黑色"/>
+
+=======
     <!--<bean id="car1" class="com.zy.reflect.Car"-->
           <!--p:brand="红旗"-->
           <!--p:color="color"-->
           <!--p:maxSpeed="200"/>-->
+>>>>>>> d0f612eb5a77112ce2ba4e13189c6a4fb8201321
 
     <!-- 扫描类包，将标注Spring注解的类自动转化Bean，同时完成Bean的注入 -->
     <context:component-scan base-package="com.zy.dao"/>

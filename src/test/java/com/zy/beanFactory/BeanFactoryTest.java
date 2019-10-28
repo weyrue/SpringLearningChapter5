@@ -1,9 +1,12 @@
 package com.zy.beanFactory;
 
+import com.zy.injectFun.MagicFun;
 import com.zy.reflect.Car;
 import org.junit.Test;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -23,7 +26,22 @@ public class BeanFactoryTest {
 
         System.out.println("init beanfactory");
 
-        Car car = factory.getBean("car",Car.class);
+        Car car1 = factory.getBean("car1", Car.class);
+        Car car = factory.getBean("car", Car.class);
         car.introduce();
+    }
+
+    @Test
+    public void singletonGetPrototype() {
+        ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:spring/spring-context.xml");
+        MagicFun magicBoss = (MagicFun) ac.getBean("magicBoss");
+
+        System.out.println(magicBoss.getCar());
+        System.out.println(magicBoss.getCar());
+        System.out.println(magicBoss.getCar());
+
+        ((Car) ac.getBean("car2")).introduce();
+        ((Car) ac.getBean("car3")).introduce();
+
     }
 }
