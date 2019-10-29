@@ -11,6 +11,10 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
+import java.text.MessageFormat;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+
 public class BeanFactoryTest {
     @Test
     public void getbean() throws Throwable {
@@ -29,6 +33,8 @@ public class BeanFactoryTest {
         Car car1 = factory.getBean("car1", Car.class);
         Car car = factory.getBean("car", Car.class);
         car.introduce();
+
+        Locale locale = Locale.PRC;
     }
 
     @Test
@@ -42,6 +48,28 @@ public class BeanFactoryTest {
 
         ((Car) ac.getBean("car2")).introduce();
         ((Car) ac.getBean("car3")).introduce();
+
+    }
+
+    @Test
+    public void testLocale() {
+        ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:spring/spring-context.xml");
+        String pattern1 = "{0}，您好！您于{1}在工商银行存入{2}元";
+        String pattern2 = "At {1,time,short} On {1,date,long}, {0} paid {2,number,currency}.";
+
+        Object[] params = {"John", new GregorianCalendar().getTime(), 1.0E3};
+
+        String msg1 = MessageFormat.format(pattern1, params);
+
+        MessageFormat mf = new MessageFormat(pattern2, Locale.US);
+        String msg2 = mf.format(params);
+        System.out.println(msg1);
+        System.out.println(msg2);
+
+        String str1 = ac.getMessage("greeting.common", params, Locale.getDefault());
+//        String str2 = ac.getMessage("greeting.morning", params, Locale.US);
+        System.out.println(str1);
+//        System.out.println(str2);
 
     }
 }

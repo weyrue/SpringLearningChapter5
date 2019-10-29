@@ -12,7 +12,6 @@
        http://www.springframework.org/schema/aop
        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
-<<<<<<< HEAD
     <bean id="car" class="com.zy.reflect.Car"
           p:brand="红旗"
           p:color="color"
@@ -37,12 +36,10 @@
     <bean id="car2" parent="abstractCar" p:color="红色"/>
     <bean id="car3" parent="abstractCar" p:color="黑色"/>
 
-=======
-    <!--<bean id="car1" class="com.zy.reflect.Car"-->
-          <!--p:brand="红旗"-->
-          <!--p:color="color"-->
-          <!--p:maxSpeed="200"/>-->
->>>>>>> d0f612eb5a77112ce2ba4e13189c6a4fb8201321
+    <!--    <bean id="car1" class="com.zy.reflect.Car"-->
+    <!--          p:brand="红旗"-->
+    <!--          p:color="color"-->
+    <!--          p:maxSpeed="200"/>-->
 
     <!-- 扫描类包，将标注Spring注解的类自动转化Bean，同时完成Bean的注入 -->
     <context:component-scan base-package="com.zy.dao"/>
@@ -66,6 +63,15 @@
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
           p:dataSource-ref="dataSource"/>
 
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>/locale/fmt_en_US.properties</value>
+            </list>
+        </property>
+    </bean>
+
+
     <!-- 通过AOP配置提供事务增强，让service包下所有Bean的所有方法拥有事务 -->
     <aop:config proxy-target-class="true">
         <aop:pointcut id="serviceMethod"
@@ -77,4 +83,6 @@
             <tx:method name="*"/>
         </tx:attributes>
     </tx:advice>
+
+
 </beans>
