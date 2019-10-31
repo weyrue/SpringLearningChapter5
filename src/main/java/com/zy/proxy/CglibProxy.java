@@ -20,6 +20,9 @@ public class CglibProxy implements MethodInterceptor {
         PerformanceMonitor.begin(o.getClass().getName() + "." + method.getName());
         Object result = methodProxy.invokeSuper(o, objects);
         PerformanceMonitor.end();
+
+        ThreadLocal<String> threadLocal = new ThreadLocal<>();
+
         return result;
     }
 }

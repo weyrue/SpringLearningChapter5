@@ -41,10 +41,19 @@
     <!--          p:color="color"-->
     <!--          p:maxSpeed="200"/>-->
 
+
+    <!--切面类-->
+    <bean class="com.zy.aspectj.aspectj.PreGreetingAspect"/>
+    <!--aop自动织入,以下两种方式均可以-->
+    <!--proxy-target-class="true"表示CGLib动态代理方式织入增强，false为使用JDK代理方式-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+<!--    <bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator"/>-->
+
     <!-- 扫描类包，将标注Spring注解的类自动转化Bean，同时完成Bean的注入 -->
     <context:component-scan base-package="com.zy.dao"/>
     <context:component-scan base-package="com.zy.service"/>
     <context:component-scan base-package="com.zy.reflect"/>
+    <context:component-scan base-package="com.zy.advisor"/>
 
     <!-- 配置数据源 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
