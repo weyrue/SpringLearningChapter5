@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+    <bean class="com.zy.bean.lifeCycle.LifeCycleBean"
+          init-method="initMethod"
+          destroy-method="destroyMethod"
+          lazy-init="true"/>
+
+    <bean id = "shaDigest" class="com.zy.bean.lifeCycle.MessageDigestFactoryBean"
+          p:algorithmName="SHA1"
+          lazy-init="true"/>
+
+    <bean id = "defaultDigest" class="com.zy.bean.lifeCycle.MessageDigestFactoryBean"
+          lazy-init="true"/>
+
+    <bean id="digester" class="com.zy.bean.lifeCycle.MessageDigester"
+          p:messageDigest1-ref="defaultDigest"
+          p:messageDigest2-ref="shaDigest"
+          lazy-init="true"/>
+
+
+    <bean id = "shaDigestFactory" class="com.zy.bean.lifeCycle.MessageDigestFactory"
+          p:algorithmName="SHA1"
+          lazy-init="true"/>
+
+    <bean id = "defaultDigestFactory" class="com.zy.bean.lifeCycle.MessageDigestFactory"
+          lazy-init="true"/>
+
+    <bean id="shaDigest2" factory-bean="shaDigestFactory" factory-method="createInstance"/>
+    <bean id="defaultDigest2" factory-bean="defaultDigestFactory" factory-method="createInstance"/>
+
+    <bean id="digester2" class="com.zy.bean.lifeCycle.MessageDigester"
+          p:messageDigest1-ref="defaultDigest2"
+          p:messageDigest2-ref="shaDigest2"
+          lazy-init="true"/>
+
+
+    <context:annotation-config/>
+
+</beans>

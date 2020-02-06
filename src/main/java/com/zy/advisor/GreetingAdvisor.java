@@ -2,8 +2,10 @@ package com.zy.advisor;
 
 import org.springframework.aop.ClassFilter;
 import org.springframework.aop.support.StaticMethodMatcherPointcutAdvisor;
+import org.springframework.beans.factory.BeanFactory;
 
 import java.lang.reflect.Method;
+import java.util.*;
 
 public class GreetingAdvisor extends StaticMethodMatcherPointcutAdvisor {
     @Override
@@ -20,4 +22,13 @@ public class GreetingAdvisor extends StaticMethodMatcherPointcutAdvisor {
             }
         };
     }
+
+    public static void main(String[] args) {
+
+        System.runFinalization();
+    }
+
+
 }
+
+
