@@ -1,6 +1,7 @@
 package com.zy.proxy;
 
 import org.junit.Test;
+import org.springframework.cglib.proxy.Enhancer;
 
 import java.lang.reflect.Proxy;
 
@@ -19,8 +20,10 @@ public class ForumServiceTest {
 
     @Test
     public void cglibProxy() {
-        CglibProxy proxy = new CglibProxy();
-        ForumServiceImpl forumService = (ForumServiceImpl) proxy.getProxy(ForumServiceImpl.class);
+        Enhancer enhancer = new Enhancer();
+        enhancer.setSuperclass(ForumServiceImpl.class);
+        enhancer.setCallback(new CglibProxy());
+        ForumServiceImpl forumService = (ForumServiceImpl) enhancer.create();
         forumService.removeForum(10);
         forumService.removeTopic(1012);
     }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!--    配置文件顺序必须符合以下顺序，否则运行报错-->
+    <!--    properties?,settings?,typeAliases?,typeHandlers?,-->
+    <!--    objectFactory?,objectWrapperFactory?,reflectorFactory?,-->
+    <!--    plugins?,environments?,databaseIdProvider?,mappers?-->
+
+    <properties resource="properties/mybatis.properties">
+        <!--        <property name="dialect" value="MySQL"/>-->
+    </properties>
+
+    <!-- 配置mybatis的缓存，延迟加载等等一系列属性 -->
+    <settings>
+        <!-- 全局映射器启用缓存 -->
+        <setting name="cacheEnabled" value="true"/>
+
+        <!-- 查询时，关闭关联对象即时加载以提高性能 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+
+        <!-- 对于未知的SQL查询，允许返回不同的结果集以达到通用的效果 -->
+        <setting name="multipleResultSetsEnabled" value="true"/>
+
+        <!-- 允许使用列标签代替列名 -->
+        <setting name="useColumnLabel" value="true"/>
+
+        <!-- 不允许使用自定义的主键值(比如由程序生成的UUID 32位编码作为键值)，数据表的PK生成策略将被覆盖 -->
+        <setting name="useGeneratedKeys" value="false"/>
+
+        <!--打印日志-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+
+        <!--将字段名映射为驼峰式命名规则-->
+        <!--        <setting name="mapUnderscoreToCamelCase" value="true"/>-->
+
+        <!-- Allows using RowBounds on nested statements -->
+        <setting name="safeRowBoundsEnabled" value="false"/>
+    </settings>
+
+    <typeAliases>
+        <package name="com.zy.web.entities"/>
+    </typeAliases>
+
+    <!--<plugins>
+        <plugin interceptor="com.zy.mysql.mybatis.page.PageInterceptor"/>
+    </plugins>-->
+</configuration>

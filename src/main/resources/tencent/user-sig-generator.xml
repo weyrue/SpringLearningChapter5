@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="userSigGenerator" class="com.zy.tencent.UserSigGenerator">
+        <constructor-arg name="sdkappid" value="1400320131"/>
+        <constructor-arg name="key" value="a404419f0899d74967f9641d7ad48aee72ce460bc3d07ff2ae9bb7f5b06dd5a2"/>
+    </bean>
+
+    <bean id="clientHttpRequestFactory" class="org.springframework.http.client.SimpleClientHttpRequestFactory"
+          p:connectTimeout="30000"
+          p:readTimeout="30000"/>
+
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <constructor-arg ref="clientHttpRequestFactory"/>
+    </bean>
+
+    <bean id="restfulAction" class="com.zy.tencent.RestfulAction"
+          p:restTemplate-ref="restTemplate"/>
+
+</beans>

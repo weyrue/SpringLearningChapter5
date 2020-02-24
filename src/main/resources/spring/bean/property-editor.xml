@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+<!--    <context:property-placeholder location="classpath:test.properties,test2.properties"/>-->
+
+
+    <bean id="buildInSample" class="com.zy.bean.propertyEditor.DefaultPropertyEditor"
+          p:character="A"
+          p:cls="org.springframework.context.support.GenericXmlApplicationContext"
+          p:date="02/12/20"
+          p:l="99"
+    />
+
+    <bean id="customEditorConfigurer" class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="customEditors">
+            <map>
+                <entry key="com.zy.bean.propertyEditor.FullName"
+                       value="com.zy.bean.propertyEditor.MyNamePropertyEditor"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="mySample" class="com.zy.bean.propertyEditor.MyEditorSample"
+          p:fullName="Yi Zhang"/>
+
+</beans>

@@ -4,27 +4,46 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:spring/smart-servlet.xml</param-value>
-    </context-param>
-    <listener>
-        <listener-class>
-            org.springframework.web.context.ContextLoaderListener
-        </listener-class>
-    </listener>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
 
+    <!--配置SpringMVC的请求的Servlet-->
     <servlet>
-        <servlet-name>smart</servlet-name>
-        <servlet-class>
-            org.springframework.web.servlet.DispatcherServlet
-        </servlet-class>
-        <load-on-startup>3</load-on-startup>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring/web/spring-simple-web.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
     </servlet>
-
     <servlet-mapping>
-        <servlet-name>smart</servlet-name>
-        <url-pattern>*.html</url-pattern>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+<!--    <context-param>-->
+<!--        <param-name>contextConfigLocation</param-name>-->
+<!--        <param-value>classpath:spring/smart-servlet.xml</param-value>-->
+<!--    </context-param>-->
+<!--    <listener>-->
+<!--        <listener-class>-->
+<!--            org.springframework.web.context.ContextLoaderListener-->
+<!--        </listener-class>-->
+<!--    </listener>-->
+
+<!--    <servlet>-->
+<!--        <servlet-name>smart</servlet-name>-->
+<!--        <servlet-class>-->
+<!--            org.springframework.web.servlet.DispatcherServlet-->
+<!--        </servlet-class>-->
+<!--        <load-on-startup>3</load-on-startup>-->
+<!--    </servlet>-->
+
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>smart</servlet-name>-->
+<!--        <url-pattern>*.html</url-pattern>-->
+<!--    </servlet-mapping>-->
 
 </web-app>

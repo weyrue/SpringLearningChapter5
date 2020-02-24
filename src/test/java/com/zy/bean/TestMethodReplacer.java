@@ -26,15 +26,4 @@ public class TestMethodReplacer {
         boss1.getCar().introduce();
     }
 
-    @Test
-    public void testCharset(){
-        String s = "Äú²éÕÒµÄ×ÊÔ´´æÔÚÎÊÌâ£¬Òò¶øÎÞ·¨ÏÔÊ¾¡£";
-
-        try {
-            System.out.println(new String(s.getBytes("GB2312"),StandardCharsets.UTF_8));
-            System.out.println(new String(s.getBytes(StandardCharsets.UTF_8),"GB2312"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-    }
 }

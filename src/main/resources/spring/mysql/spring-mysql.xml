@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <context:component-scan base-package="com.zy.web"/>
+
+    <context:property-placeholder location="classpath:properties/db.properties"/>
+
+    <!--配置数据源，使用阿里DruidDataSource数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+        <property name="driverClassName" value="${mysql.driver}"/>
+        <property name="url" value="${mysql.url}"/>
+        <property name="username" value="${mysql.username}"/>
+        <property name="password" value="${mysql.password}"/>
+        <!--Initial pool size初始连接池大小-->
+        <property name="initialSize" value="${mysql.initialSize}"/>
+        <!--数据库连接池最大连接数，0为没有限制-->
+        <property name="maxActive" value="${mysql.maxActive}"/>
+        <!--数据库连接池最大空闲连接数-->
+        <property name="maxIdle" value="${mysql.maxIdle}"/>
+        <!--数据库连接池最小空闲连接数-->
+        <property name="minIdle" value="${mysql.minIdle}"/>
+        <!--最大建立连接等待时间，-1为没有限制-->
+        <property name="maxWait" value="${mysql.maxWait}"/>
+    </bean>
+
+    <!--配置SqlSessionFactoryBean，目的是在spring框架下引入MyBatis-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis/mybatis-configuration.xml"/>
+        <property name="mapperLocations" value="classpath*:com/zy/web/mapper/*.xml"/>
+        <property name="plugins" ref="pageInterceptor"/>
+        <!--<property name="typeAliasesPackage" value=""/>-->
+        <!--<property name="typeAliasesSuperType" value=""/>-->
+        <!--<property name="configurationProperties">
+            <props>
+                <prop key="dialect">MySQL</prop>
+            </props>
+        </property>-->
+    </bean>
+
+    <!--配置DAO层所在的Package-->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer"
+          p:sqlSessionFactoryBeanName="sqlSessionFactory"
+          p:basePackage="com.zy.web.dao"/>
+
+    <!--配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+          p:dataSource-ref="dataSource"/>
+
+    <!--配置分页插件Bean（需要配置到SqlSessionFactoryBean中）-->
+    <bean id="pageInterceptor" class="com.zy.mysql.mybatis.page.PageInterceptor"/>
+
+</beans>

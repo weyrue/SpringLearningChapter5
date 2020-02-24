@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.web.dao.SingerMapper">
+    <resultMap id="BaseResultMap" type="com.zy.web.entities.SingerPO">
+        <id column="ID" jdbcType="INTEGER" property="id"/>
+        <result column="FIRST_NAME" jdbcType="VARCHAR" property="firstName"/>
+        <result column="LAST_NAME" jdbcType="VARCHAR" property="lastName"/>
+        <result column="BIRTH_DATE" jdbcType="DATE" property="birthDate"/>
+        <result column="DESCRIPTION" jdbcType="VARCHAR" property="description"/>
+        <result column="VERSION" jdbcType="INTEGER" property="version"/>
+    </resultMap>
+
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zy.web.entities.SingerPO">
+        <result column="PHOTO" jdbcType="LONGVARBINARY" property="photo"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    ID, FIRST_NAME, LAST_NAME, BIRTH_DATE, DESCRIPTION, VERSION
+    </sql>
+
+    <sql id="Blob_Column_List">
+      PHOTO
+    </sql>
+
+    <select id="get" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        FROM singer
+        <where>
+            <if test="id != null">
+                AND ID = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="firstName != null">
+                AND FIRST_NAME = #{firstName,jdbcType=VARCHAR}
+            </if>
+            <if test="lastName != null">
+                AND LAST_NAME = #{lastName,jdbcType=VARCHAR}
+            </if>
+            <if test="birthDate != null">
+                AND BIRTH_DATE = #{birthDate,jdbcType=DATE}
+            </if>
+            <if test="description != null">
+                AND DESCRIPTION = #{description,jdbcType=VARCHAR}
+            </if>
+            <if test="version != null">
+                AND VERSION = #{version,jdbcType=INTEGER}
+            </if>
+            <if test="photo != null">
+                AND PHOTO = #{photo,jdbcType=LONGVARBINARY}
+            </if>
+        </where>
+        <choose>
+            <when test="orderBy != null and orderBy != ''">
+                order by ${orderBy}
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findByList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        FROM singer
+        <where>
+            <if test="id != null">
+                AND ID = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="firstName != null">
+                AND FIRST_NAME = #{firstName,jdbcType=VARCHAR}
+            </if>
+            <if test="lastName != null">
+                AND LAST_NAME = #{lastName,jdbcType=VARCHAR}
+            </if>
+            <if test="birthDate != null">
+                AND BIRTH_DATE = #{birthDate,jdbcType=DATE}
+            </if>
+            <if test="description != null">
+                AND DESCRIPTION = #{description,jdbcType=VARCHAR}
+            </if>
+            <if test="version != null">
+                AND VERSION = #{version,jdbcType=INTEGER}
+            </if>
+            <if test="photo != null">
+                AND PHOTO = #{photo,jdbcType=LONGVARBINARY}
+            </if>
+        </where>
+        <choose>
+            <when test="orderBy != null and orderBy != ''">
+                order by ${orderBy}
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findByPage" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        FROM singer
+        <where>
+            <if test="id != null">
+                AND ID = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="firstName != null">
+                AND FIRST_NAME = #{firstName,jdbcType=VARCHAR}
+            </if>
+            <if test="lastName != null">
+                AND LAST_NAME = #{lastName,jdbcType=VARCHAR}
+            </if>
+            <if test="birthDate != null">
+                AND BIRTH_DATE = #{birthDate,jdbcType=DATE}
+            </if>
+            <if test="description != null">
+                AND DESCRIPTION = #{description,jdbcType=VARCHAR}
+            </if>
+            <if test="version != null">
+                AND VERSION = #{version,jdbcType=INTEGER}
+            </if>
+            <if test="photo != null">
+                AND PHOTO = #{photo,jdbcType=LONGVARBINARY}
+            </if>
+        </where>
+        <choose>
+            <when test="orderBy != null and orderBy != ''">
+                order by ${orderBy}
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+      delete from singer
+      where ID = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="SingerPO">
+      insert into singer (ID, FIRST_NAME, LAST_NAME,
+        BIRTH_DATE, DESCRIPTION, VERSION,
+        PHOTO)
+      values (#{id,jdbcType=INTEGER}, #{firstName,jdbcType=VARCHAR}, #{lastName,jdbcType=VARCHAR},
+        #{birthDate,jdbcType=DATE}, #{description,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER},
+        #{photo,jdbcType=LONGVARBINARY})
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="SingerPO">
+        UPDATE singer
+        <set>
+            <if test="firstName != null">
+                FIRST_NAME = #{firstName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastName != null">
+                LAST_NAME = #{lastName,jdbcType=VARCHAR},
+            </if>
+            <if test="birthDate != null">
+                BIRTH_DATE = #{birthDate,jdbcType=DATE},
+            </if>
+            <if test="description != null">
+                DESCRIPTION = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null">
+                VERSION = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="photo != null">
+                PHOTO = #{photo,jdbcType=LONGVARBINARY},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
