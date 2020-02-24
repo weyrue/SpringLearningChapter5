@@ -14,7 +14,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <!--        <spring.version>4.3.23.RELEASE</spring.version>-->
-        <spring.version>5.2.2.RELEASE</spring.version>
+        <spring.version>5.2.3.RELEASE</spring.version>
         <junit.verison>4.13</junit.verison>
         <commons-dbcp.version>1.4</commons-dbcp.version>
         <mysql.version>5.1.35</mysql.version>
