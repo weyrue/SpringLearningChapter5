@@ -7,7 +7,7 @@
     <groupId>com.zy</groupId>
     <artifactId>SpringLearning</artifactId>
     <version>1.0-SNAPSHOT</version>
-<!--    <packaging>war</packaging>-->
+    <packaging>war</packaging>
 
     <properties>
         <file.encoding>UTF-8</file.encoding>
@@ -25,6 +25,10 @@
         <mybatis.spring.version>2.0.3</mybatis.spring.version>
         <druid.version>1.1.21</druid.version>
         <org.json.version>20190722</org.json.version>
+        <fasterxml.jackson.core.version>2.10.2</fasterxml.jackson.core.version>
+        <commons-fileupload.version>1.4</commons-fileupload.version>
+        <commons-io.version>2.6</commons-io.version>
+        <javax.servlet.version>4.0.1</javax.servlet.version>
     </properties>
 
     <dependencies>
@@ -113,11 +117,39 @@
             <artifactId>druid</artifactId>
             <version>${druid.version}</version>
         </dependency>
+        <!--tencent的IM模块使用-->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>${org.json.version}</version>
         </dependency>
+        <!--增加jackson-databind作用是Controller返回对象时的转换器-->
+        <!--虽然没有显示调用，但是实际<mvc:annotation-driven/>会使用这个jar-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${fasterxml.jackson.core.version}</version>
+        </dependency>
+        <!--文件上传使用-->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>${commons-fileupload.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${javax.servlet.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+
 
     </dependencies>
 

@@ -40,9 +40,10 @@
         <setting name="safeRowBoundsEnabled" value="false"/>
     </settings>
 
-    <typeAliases>
-        <package name="com.zy.web.entities"/>
-    </typeAliases>
+    <!--此处配置会在tomcat启动时打印奇怪日志（没有实际影响），改在SqlSessionFactoryBean中配置-->
+<!--    <typeAliases>-->
+<!--        <package name="com.zy.web.entities"/>-->
+<!--    </typeAliases>-->
 
     <!--<plugins>
         <plugin interceptor="com.zy.mysql.mybatis.page.PageInterceptor"/>

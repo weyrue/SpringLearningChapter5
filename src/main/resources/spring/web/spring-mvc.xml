@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!--开启注解模式驱动-->
+    <mvc:annotation-driven/>
+    <!--对静态资源放行-->
+    <mvc:default-servlet-handler/>
+
+    <!--扫描Controller，只扫描@Controller注解的类-->
+    <!--use-default-filters默认是true，默认扫描@Component、@Service、@Controller和@Repository等注解的类-->
+    <!--use-default-filters关闭后，会按照配置中的要求扫描-->
+    <!--如果只关闭use-default-filters而不指定include-filter，则不会扫描任何东西-->
+    <!--所以use-default-filters="false"和include-filter搭配使用；exclude-filter则需要保持use-default-filters打开-->
+    <context:component-scan base-package="com.zy.web.controller" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--配置视图解析器 如何把handler 方法返回值解析为实际的物理视图-->
+    <!--prefix和suffix：查找视图页面的前缀和后缀（前缀[逻辑视图名]后缀），-->
+    <!--比如传进来的逻辑视图名为result，则该该jsp视图页面应该存放在“/WEB-INF/result.jsp” -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/views"
+          p:suffix=".jsp"/>
+
+<!--    &lt;!&ndash;单位为字节&ndash;&gt;-->
+<!--    <bean id="commonsMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"-->
+<!--          p:maxUploadSize="100000000"-->
+<!--          p:defaultEncoding="UTF-8"/>-->
+
+</beans>

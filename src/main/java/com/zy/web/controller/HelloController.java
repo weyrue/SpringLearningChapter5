@@ -1,16 +1,14 @@
-package com.zy.web.Controller;
+package com.zy.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/miya")
 public class HelloController {
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping("/hello")
     public String hello() {
         System.out.println("hello miya!");
-        return "index.jsp";
+        return "/hello";
     }
 }

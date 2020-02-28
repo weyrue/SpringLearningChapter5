@@ -5,8 +5,32 @@
          version="4.0">
 
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>index.html</welcome-file>
     </welcome-file-list>
+
+    <!--spring的Application Context配置-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath:spring/web/spring-simple-web.xml,
+            classpath:spring/web/spring-mvc.xml
+        </param-value>
+    </context-param>
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+
+    <!--在DispatcherServlet前配置-->
+    <!--如果没有使用<mvc:default-servlet-handler/>，-->
+    <!--可以使用以下配置将一些静态资源交由默认servlet处理，避免被拦截-->
+    <!--    <servlet-mapping>-->
+    <!--        <servlet-name>default</servlet-name>-->
+    <!--        <url-pattern>*.html</url-pattern>-->
+    <!--        <servlet-name>default</servlet-name>-->
+    <!--        <url-pattern>*.js</url-pattern>-->
+    <!--    </servlet-mapping>-->
 
     <!--配置SpringMVC的请求的Servlet-->
     <servlet>
@@ -14,36 +38,41 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring/web/spring-simple-web.xml</param-value>
+            <param-value>classpath:spring/web/spring-mvc.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>DispatcherServlet</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
 
-<!--    <context-param>-->
-<!--        <param-name>contextConfigLocation</param-name>-->
-<!--        <param-value>classpath:spring/smart-servlet.xml</param-value>-->
-<!--    </context-param>-->
-<!--    <listener>-->
-<!--        <listener-class>-->
-<!--            org.springframework.web.context.ContextLoaderListener-->
-<!--        </listener-class>-->
-<!--    </listener>-->
-
+    <!--上传文件servlet-->
+    <!--以下web.xml配置和注解配置（@WebServlet("/upload")，@MultipartConfig）二选一-->
+    <!--参考com.zy.web.controller.UploadServlet-->
 <!--    <servlet>-->
-<!--        <servlet-name>smart</servlet-name>-->
-<!--        <servlet-class>-->
-<!--            org.springframework.web.servlet.DispatcherServlet-->
-<!--        </servlet-class>-->
-<!--        <load-on-startup>3</load-on-startup>-->
+<!--        <servlet-name>uploadFileServlet</servlet-name>-->
+<!--        <servlet-class>com.zy.web.servlet.UploadServlet</servlet-class>-->
 <!--    </servlet>-->
-
 <!--    <servlet-mapping>-->
-<!--        <servlet-name>smart</servlet-name>-->
-<!--        <url-pattern>*.html</url-pattern>-->
+<!--        <servlet-name>uploadFileServlet</servlet-name>-->
+<!--        <url-pattern>/upload</url-pattern>-->
 <!--    </servlet-mapping>-->
+
+
+    <!--配置相应的过滤器:角色SpringMVC 的POST请求的乱码问题 -->
+    <!--配置编码方式过滤器,注意一点:要配置在所有过滤器的前面 -->
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
 </web-app>

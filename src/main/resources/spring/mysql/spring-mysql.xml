@@ -35,7 +35,7 @@
         <property name="configLocation" value="classpath:mybatis/mybatis-configuration.xml"/>
         <property name="mapperLocations" value="classpath*:com/zy/web/mapper/*.xml"/>
         <property name="plugins" ref="pageInterceptor"/>
-        <!--<property name="typeAliasesPackage" value=""/>-->
+        <property name="typeAliasesPackage" value="com.zy.web.entities"/>
         <!--<property name="typeAliasesSuperType" value=""/>-->
         <!--<property name="configurationProperties">
             <props>
