@@ -16,6 +16,7 @@ public class ForumServiceTest {
                 target.getClass().getInterfaces(), handler);
         proxy.removeForum(10);
         proxy.removeTopic(1012);
+        System.out.println(proxy.getClass().getCanonicalName());
     }
 
     @Test

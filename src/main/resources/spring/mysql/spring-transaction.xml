@@ -20,8 +20,31 @@
        http://www.springframework.org/schema/util
        http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <context:component-scan base-package="com.zy.web"/>
 
+    <!--事务管理器的名字缺省值是transactionManager，当id不一样是可以手动配置-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!--编程式事务使用TransactionTemplate.execute()方法，需要注入TransactionTemplate的Bean-->
+    <!--    <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate"-->
+    <!--          p:transactionManager-ref="transactionManager"/>-->
+
+    <!--aop配置事务管理，适用于引入外部类不方便使用注解实物配置时使用-->
+    <!--    <aop:config>-->
+    <!--        <aop:pointcut id="serviceOperation" expression="execution( * com.zy.web.service.impl.*Imp*.*(..))"/>-->
+    <!--        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation"/>-->
+    <!--    </aop:config>-->
+
+    <!--    <tx:advice id="txAdvice">-->
+    <!--        <tx:attributes>-->
+    <!--            <tx:method name="save*" read-only="false" propagation="REQUIRED" isolation="SERIALIZABLE"/>-->
+    <!--        </tx:attributes>-->
+    <!--    </tx:advice>-->
+
+
+    <context:component-scan base-package="com.zy.web">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <!--配置属性文件-->
     <context:property-placeholder location="classpath:properties/db.properties"/>
 
     <!--配置数据源，使用阿里DruidDataSource数据源-->
@@ -68,5 +91,6 @@
 
     <!--配置分页插件Bean（需要配置到SqlSessionFactoryBean中）-->
     <bean id="pageInterceptor" class="com.zy.mysql.mybatis.page.PageInterceptor"/>
+
 
 </beans>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zy.web.dao.SingerMapper">
-    <resultMap id="BaseResultMap" type="com.zy.web.entities.SingerPO">
+
+    <resultMap id="BaseResultMap" type="SingerPO">
         <id column="ID" jdbcType="INTEGER" property="id"/>
         <result column="FIRST_NAME" jdbcType="VARCHAR" property="firstName"/>
         <result column="LAST_NAME" jdbcType="VARCHAR" property="lastName"/>
@@ -15,7 +16,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-    ID, FIRST_NAME, LAST_NAME, BIRTH_DATE, DESCRIPTION, VERSION
+        ID, FIRST_NAME, LAST_NAME, BIRTH_DATE, DESCRIPTION, VERSION
     </sql>
 
     <sql id="Blob_Column_List">
@@ -51,13 +52,6 @@
                 AND PHOTO = #{photo,jdbcType=LONGVARBINARY}
             </if>
         </where>
-        <choose>
-            <when test="orderBy != null and orderBy != ''">
-                order by ${orderBy}
-            </when>
-            <otherwise>
-            </otherwise>
-        </choose>
     </select>
 
     <select id="findByList" resultMap="BaseResultMap">
@@ -98,7 +92,7 @@
         </choose>
     </select>
 
-    <select id="findByPage" resultMap="BaseResultMap">
+    <select id="findByPage" resultType="SingerPO">
         SELECT
         <include refid="Base_Column_List"/>
         ,
@@ -127,13 +121,6 @@
                 AND PHOTO = #{photo,jdbcType=LONGVARBINARY}
             </if>
         </where>
-        <choose>
-            <when test="orderBy != null and orderBy != ''">
-                order by ${orderBy}
-            </when>
-            <otherwise>
-            </otherwise>
-        </choose>
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -141,7 +128,7 @@
       where ID = #{id,jdbcType=INTEGER}
     </delete>
 
-    <insert id="insert" parameterType="SingerPO">
+    <insert id="insert" parameterType="SingerPO" useGeneratedKeys="true" keyProperty="id">
       insert into singer (ID, FIRST_NAME, LAST_NAME,
         BIRTH_DATE, DESCRIPTION, VERSION,
         PHOTO)

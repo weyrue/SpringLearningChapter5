@@ -16,5 +16,5 @@ public interface BaseDao<T> {
 
     List<T> findByList(T entity);
 
-    List<T> findBypage(Page<T> page, T entity);
+    List<T> findByPage(Page<T> page, T entity);
 }

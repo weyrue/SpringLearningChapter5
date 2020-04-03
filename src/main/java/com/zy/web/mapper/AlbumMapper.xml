@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnpc.commodity.dao.AlbumMapper">
+
+    <resultMap id="BaseResultMap" type="com.zy.web.entities.AlbumPO">
+        <id column="ID" jdbcType="INTEGER" property="id"/>
+        <result column="SINGER_ID" jdbcType="INTEGER" property="singerId"/>
+        <result column="TITLE" jdbcType="VARCHAR" property="title"/>
+        <result column="RELEASE_DATE" jdbcType="DATE" property="releaseDate"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID, SINGER_ID, TITLE, RELEASE_DATE
+    </sql>
+
+    <select id="get" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM album
+        <where>
+            <if test="id != null">
+                AND ID = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="singerId != null">
+                AND SINGER_ID = #{singerId,jdbcType=INTEGER}
+            </if>
+            <if test="title != null">
+                AND TITLE = #{title,jdbcType=VARCHAR}
+            </if>
+            <if test="releaseDate != null">
+                AND RELEASE_DATE = #{releaseDate,jdbcType=DATE}
+            </if>
+        </where>
+    </select>
+
+    <select id="findByList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM album
+        <where>
+            <if test="id != null">
+                AND ID = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="singerId != null">
+                AND SINGER_ID = #{singerId,jdbcType=INTEGER}
+            </if>
+            <if test="title != null">
+                AND TITLE = #{title,jdbcType=VARCHAR}
+            </if>
+            <if test="releaseDate != null">
+                AND RELEASE_DATE = #{releaseDate,jdbcType=DATE}
+            </if>
+        </where>
+        <choose>
+            <when test="orderBy != null and orderBy != ''">
+                order by ${orderBy}
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findByPage" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM album
+        <where>
+            <if test="id != null">
+                AND ID = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="singerId != null">
+                AND SINGER_ID = #{singerId,jdbcType=INTEGER}
+            </if>
+            <if test="title != null">
+                AND TITLE = #{title,jdbcType=VARCHAR}
+            </if>
+            <if test="releaseDate != null">
+                AND RELEASE_DATE = #{releaseDate,jdbcType=DATE}
+            </if>
+        </where>
+        <choose>
+            <when test="orderBy != null and orderBy != ''">
+                order by ${orderBy}
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from album
+        where ID = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="AlbumPO" useGeneratedKeys="true" keyProperty="ID">
+        insert into album (ID, SINGER_ID, TITLE,
+          RELEASE_DATE)
+        values (#{id,jdbcType=INTEGER}, #{singerId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
+          #{releaseDate,jdbcType=DATE})
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="AlbumPO">
+        update album
+        <set>
+            <if test="singerId != null">
+                SINGER_ID = #{singerId,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                TITLE = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="releaseDate != null">
+                RELEASE_DATE = #{releaseDate,jdbcType=DATE},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+
+</mapper>

@@ -7,6 +7,8 @@ import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.RowBounds;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 import java.sql.Connection;
@@ -17,11 +19,11 @@ import java.util.Properties;
 
 @Intercepts({@Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class, Integer.class})})
 public class PageInterceptor implements Interceptor {
+//    private static final Logger log = LoggerFactory.getLogger(PageInterceptor.class);
     private final static Dialect DIALECT = new Dialect();
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
-        System.out.println("Start PageInterceptor ...");
         StatementHandler statementHandler = (StatementHandler) invocation.getTarget();
         ParameterHandler parameterHandler = statementHandler.getParameterHandler();
 
@@ -44,6 +46,8 @@ public class PageInterceptor implements Interceptor {
         if (rowBounds == null || rowBounds == RowBounds.DEFAULT) {
             return invocation.proceed();
         }
+
+//        log.info("Starting PageInterceptor ...");
 
         /*
          * 分页情况
@@ -77,6 +81,8 @@ public class PageInterceptor implements Interceptor {
             metaObject.setValue("delegate.rowBounds.offset", RowBounds.NO_ROW_OFFSET);
             metaObject.setValue("delegate.rowBounds.limit", RowBounds.NO_ROW_LIMIT);
         }
+
+//        log.info("Ending PageInterceptor ...");
 
         return invocation.proceed();
     }

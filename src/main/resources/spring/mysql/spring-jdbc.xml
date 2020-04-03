@@ -20,8 +20,7 @@
        http://www.springframework.org/schema/util
        http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <context:component-scan base-package="com.zy.web"/>
-
+    <!--配置属性文件-->
     <context:property-placeholder location="classpath:properties/db.properties"/>
 
     <!--配置数据源，使用阿里DruidDataSource数据源-->
@@ -42,31 +41,6 @@
         <property name="maxWait" value="${mysql.maxWait}"/>
     </bean>
 
-    <!--配置SqlSessionFactoryBean，目的是在spring框架下引入MyBatis-->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" value="classpath:mybatis/mybatis-configuration.xml"/>
-        <property name="mapperLocations" value="classpath*:com/zy/web/mapper/*.xml"/>
-        <property name="plugins" ref="pageInterceptor"/>
-        <property name="typeAliasesPackage" value="com.zy.web.entities"/>
-        <!--<property name="typeAliasesSuperType" value=""/>-->
-        <!--<property name="configurationProperties">
-            <props>
-                <prop key="dialect">MySQL</prop>
-            </props>
-        </property>-->
-    </bean>
-
-    <!--配置DAO层所在的Package-->
-    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer"
-          p:sqlSessionFactoryBeanName="sqlSessionFactory"
-          p:basePackage="com.zy.web.dao"/>
-
-    <!--配置事务管理器-->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
           p:dataSource-ref="dataSource"/>
-
-    <!--配置分页插件Bean（需要配置到SqlSessionFactoryBean中）-->
-    <bean id="pageInterceptor" class="com.zy.mysql.mybatis.page.PageInterceptor"/>
-
 </beans>

@@ -78,7 +78,7 @@ public class UploadServlet extends HttpServlet {
                 int length;
                 byte[] buffer = new byte[1024];
                 while ((length = inputStream.read(buffer)) != -1) {
-                    outputStream.write(buffer);
+                    outputStream.write(buffer, 0, length);
                 }
 
                 System.out.println(fileName + "上传成功！");

@@ -31,7 +31,8 @@
         <setting name="useGeneratedKeys" value="false"/>
 
         <!--打印日志-->
-        <setting name="logImpl" value="STDOUT_LOGGING"/>
+<!--        <setting name="logImpl" value="STDOUT_LOGGING"/>-->
+<!--        <setting name="logImpl" value="LOG4J"/>-->
 
         <!--将字段名映射为驼峰式命名规则-->
         <!--        <setting name="mapUnderscoreToCamelCase" value="true"/>-->
