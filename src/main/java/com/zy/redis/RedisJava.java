@@ -30,4 +30,5 @@ public class RedisJava {
     public void setJedisPool(JedisPool jedisPool) {
         this.jedisPool = jedisPool;
     }
+
 }
