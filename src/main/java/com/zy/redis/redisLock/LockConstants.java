@@ -15,6 +15,8 @@ public class LockConstants {
     public static final String SECONDS = "EX";
     public static final String MILLISECONDS = "PX";
 
+    public static final String OK = "OK";
+
     private LockConstants() {
     }
 }

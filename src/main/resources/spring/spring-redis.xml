@@ -13,6 +13,7 @@
        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
     <bean id="redisBean" class="com.zy.redis.RedisJava"
-          init-method="init"/>
+          init-method="init"
+          destroy-method="destroy"/>
 
 </beans>
