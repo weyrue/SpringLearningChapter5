@@ -7,11 +7,9 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
 public abstract class RedisLock implements Lock {
-    protected Jedis jedis;
     protected String lockKey;
 
-    public RedisLock(Jedis jedis, String lockKey) {
-        this.jedis = jedis;
+    public RedisLock(String lockKey) {
         this.lockKey = lockKey;
     }
 

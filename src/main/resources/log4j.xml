@@ -63,7 +63,7 @@
     </logger>
     <!-- Root Logger -->
     <root>
-        <level value="debug" />
+        <level value="info" />
         <appender-ref ref="STDOUT" />
     </root>
 
