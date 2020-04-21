@@ -1,6 +1,6 @@
 package com.zy.redis;
 
-import com.zy.redis.redisLock.LockCaseBasic;
+import com.zy.redis.redisLock.RedisLock;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +32,7 @@ public class RedisTest {
                 public void run() {
                     try {
                         log.debug("Thread" + Thread.currentThread().getId());
-                        LockCaseBasic lock = new LockCaseBasic(redis, "lockCaseBasic", 4);
+                        RedisLock lock = new RedisLock(redis, "lockCaseBasic", 4);
                         lock.lock();
                         sb.append('T');
                         sb.append('h');
