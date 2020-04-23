@@ -42,10 +42,10 @@ public class TestMyRedBlackTree {
         e.addRight(g);
         c.addLeft(h);
         h.addLeft(j);
-        h.addRight(k);
+        j.addRight(k);
         c.addRight(i);
 
-        System.out.println(a.inorderTraversal());
+        System.out.println(a.breadthFirstTraversal());
     }
 
 }
