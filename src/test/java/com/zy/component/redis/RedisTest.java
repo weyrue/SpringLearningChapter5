@@ -1,5 +1,6 @@
-package com.zy.redis;
+package com.zy.component.redis;
 
+import com.zy.redis.RedisJava;
 import com.zy.redis.redisLock.RedisLock;
 import org.junit.Test;
 import org.slf4j.Logger;

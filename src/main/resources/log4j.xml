@@ -43,8 +43,6 @@
     <logger name="java.sql.PreparedStatement" additivity="true">
         <level value="debug" />
     </logger>
-
-
     <logger name="org.apache.ibatis.logging">
         <level value="debug" />
     </logger>
@@ -57,9 +55,11 @@
     <logger name="com.ibatis">
         <level value="info" />
     </logger>
-
     <logger name="java.sql.Connection">
         <level value="info" />
+    </logger>
+    <logger name="org.apache.zookeeper">
+        <level value="error" />
     </logger>
     <!-- Root Logger -->
     <root>
