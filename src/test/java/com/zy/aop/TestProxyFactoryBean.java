@@ -3,7 +3,6 @@ package com.zy.aop;
 import com.zy.aop.introduction.Contact;
 import com.zy.aop.introduction.IsModified;
 import com.zy.aop.proxyfactorybean.Documentarist;
-import org.aopalliance.intercept.MethodInterceptor;
 import org.junit.Test;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
