@@ -2,8 +2,6 @@ package com.zy.component.zookeeper;
 
 import com.zy.zookeeper.ZooKeeperClient;
 import com.zy.zookeeper.ZooKeeperLock;
-import jodd.cache.AbstractCacheMap;
-import jodd.cache.LRUCache;
 import org.apache.zookeeper.KeeperException;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -11,10 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
