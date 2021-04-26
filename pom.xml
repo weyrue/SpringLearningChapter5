@@ -27,7 +27,7 @@
         <org.json.version>20190722</org.json.version>
         <fasterxml.jackson.core.version>2.10.2</fasterxml.jackson.core.version>
         <commons-fileupload.version>1.4</commons-fileupload.version>
-        <commons-io.version>2.6</commons-io.version>
+        <commons-io.version>2.7</commons-io.version>
         <javax.servlet.version>4.0.1</javax.servlet.version>
         <slf4j.version>1.7.30</slf4j.version>
         <redisson.version>3.12.4</redisson.version>
